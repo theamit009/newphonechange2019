@@ -9,7 +9,14 @@
     <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
     <style>
         body {
-            padding-top: 60px;
+            padding-top: 70px;
+        }
+        .space{
+            
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-20%,-50%);
         }
     </style>
     <script>
@@ -23,12 +30,14 @@
 
                 $("#message").hide();
 
-                var firstName = $("#firstName").val();
-                var lastName = $("#lastName").val();
-                var email = $("#email").val();
-                var phone = $("#phone").val();
+                var productName = $("#productname").val();
+                var productPrice = $("#productprice").val();
+                var buyerName = $("#buyername").val();
+                var buyerEmail = $("#buyeremail").val();
+                var buyerPhone = $("#buyerphone").val();
+                
 
-                if (firstName.length == 0 || lastName.length == 0 || email.length == 0 || phone.length == 0) {
+                if (productName.length == 0 || productPrice.length == 0 || buyerName.length == 0 || buyerEmail.length == 0 || buyerPhone.length == 0) {
                     errorMessage.text("All of the fields are required.");
                     error.show();
                 }
@@ -37,18 +46,20 @@
                         url: event.target.action,
                         method: event.target.method,
                         data: JSON.stringify({
-                            firstName: firstName,
-                            lastName: lastName,
-                            email: email,
-                            phone: phone
+                             productName:  productName,
+                            productPrice: productPrice,
+                            buyerName: buyerName,
+                            buyerEmail: buyerEmail,
+                            buyerPhone: buyerPhone
                         }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         success: function(data) {
-                            $("#firstName").val("");
-                            $("#lastName").val("");
-                            $("#email").val("");
-                            $("#phone").val("");
+                            $("#productname").val("");
+                            $("#productprice").val("");
+                            $("#buyername").val("");
+                            $("#buyeremail").val("");
+                            $("#buyerphone").val("");
                             $("#messageMessage").text("Record updated!");
                             $("#message").show();
                         },
@@ -67,33 +78,37 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">Phone Number Changer</a>
+                <a class="navbar-brand" href="/">Product App</a>
             </div>
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container space">
         <form id="phoneChangerForm" action="/update" method="post" style="width: 400px">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Update Your Phone Number</h3>
+                    <h3 class="panel-title">Enter Product and Buyer Details</h3>
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label for="firstName">First Name</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="For verification" required>
+                        <label for="firstName">Product Name</label>
+                        <input type="text" class="form-control" id="productname" placeholder="For verification" required>
                     </div>
                     <div class="form-group">
-                        <label for="lastName">Last Name</label>
-                        <input type="text" class="form-control" id="lastName" placeholder="For verification" required>
+                        <label for="lastName">Product Price</label>
+                        <input type="text" class="form-control" id="productprice" placeholder="For verification" required>
+                    </div>
+                            <div class="form-group">
+                                <label for="phone">Buyer's Name</label>
+                                <input type="tel" class="form-control" id="buyername" placeholder="Buyer Name" required>
+                            </div>
+                    <div class="form-group">
+                        <label for="email">Buyer's Email</label>
+                        <input type="email" class="form-control" id="buyeremail" placeholder="Buyer Email" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="For verification" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Phone</label>
-                        <input type="tel" class="form-control" id="phone" placeholder="New Phone Number" required>
+                        <label for="email">Buyer's Phone</label>
+                        <input type="email" class="form-control" id="buyerphone" placeholder="Buyer Phone" required>
                     </div>
                 </div>
                 <div class="panel-footer">
@@ -106,7 +121,7 @@
                         <span class="sr-only">Error:</span>
                         <span id="errorMessage"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update Phone Number</button>
+                    <button type="submit" class="btn btn-primary">Update Records</button>
                 </div>
             </div>
         </form>
